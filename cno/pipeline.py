@@ -21,6 +21,7 @@ from .nodes import (
 )
 from .audit import AuditLog
 from .sinks import load_sink_from_env
+from .llm import load_classifier_from_env
 
 
 @dataclass
@@ -41,7 +42,9 @@ class CNOPipeline:
     """Linear 5-node CNO pipeline. Singleton-friendly."""
 
     def __init__(self, audit: Optional[AuditLog] = None, memory: Optional[MemoryNode] = None):
-        self.input    = InputNode()
+        # Optional local-LLM backend for the input classifier; None → heuristics
+        # (default). Enable with STRATA_LLM_BACKEND=local. See cno/llm.py.
+        self.input    = InputNode(llm=load_classifier_from_env())
         self.router   = RouterNode()
         self.memory   = memory if memory is not None else MemoryNode()
         self.persona  = PersonaNode()

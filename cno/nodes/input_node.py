@@ -117,9 +117,16 @@ class InputNode:
     def classify(self, raw: str, modality_hint: Modality | None = None) -> InputClassification:
         if self.llm is not None:
             try:
+                # Enum-aware schema hint: tell the backend the EXACT allowed values,
+                # otherwise it invents out-of-enum words and we fall back needlessly.
                 out = self.llm.classify(
                     raw,
-                    '{"modality": str, "request_type": str, "tone": str}',
+                    '{"modality": one of '
+                    '["text","voice","image","video","document","code","mixed"], '
+                    '"request_type": one of '
+                    '["question","command","abstract","declarative"], '
+                    '"tone": one of '
+                    '["neutral","urgent","reflective","directive","playful"]}',
                 )
                 return InputClassification(
                     modality     = Modality(out.get("modality", "text")),
