@@ -266,7 +266,7 @@ MIT — see `LICENSE`.
 
 ## Author
 
-**Shannon Brian Kelly** — AI Orchestrator Architect.
+**Shannon Brian Kelley** — AI Orchestrator Architect.
 Built in collaboration with Claude AI (Anthropic) under file-system-bound persona
 protocol; co-creator role attributed as "Archivist of Wisdom."
 Discovered + scaffolded 2026-05-03 from prior-authored source docs.

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "cognitive-neural-overlay"
 version = "0.1.0"
 description = "5-node cognitive overlay (Input/Router/Memory/Persona/OutputSynth) per Sentinel Forge System Core Directive. CSTM_Lattice v1.0 aligned."
-authors = [{ name = "Shannon Brian Kelly" }]
+authors = [{ name = "Shannon Brian Kelley" }]
 license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.10"
