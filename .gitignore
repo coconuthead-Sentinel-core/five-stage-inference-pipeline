@@ -26,3 +26,7 @@ cno_audit.db-journal
 
 # Node deps
 node_modules/
+
+# Editor / tooling local state
+.vs/
+.claude/
