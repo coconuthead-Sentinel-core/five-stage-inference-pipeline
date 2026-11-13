@@ -14,8 +14,10 @@ def test_healthz():
 def test_root_advertises_5_node_pipeline():
     r = client.get("/")
     body = r.json()
-    assert body["canon"] == "#18"
-    assert "📥 → 🔄 → 🧊 → 🥥 → 📤" in body["glyph_pipeline"]
+    assert "Strata Core" in body["service"]
+    # advertises all five pipeline stages
+    for stage in ("input", "router", "memory", "persona", "output_synth"):
+        assert stage in body["stages"]
 
 
 def test_process_question_routes_to_analysis():

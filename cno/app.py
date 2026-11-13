@@ -1,5 +1,9 @@
 """
-FastAPI surface for CNO. Exposes the 5-node pipeline + audit log + per-node endpoints.
+Strata Core — FastAPI surface for the NLP inference pipeline. Exposes the
+5-stage pipeline + audit log + per-stage endpoints.
+
+The route namespace and Python package are `cno` (the service's internal
+module name); the project/product name is Strata Core.
 
 Run:
     uvicorn cno.app:app --reload
@@ -37,11 +41,14 @@ log = logging.getLogger("cno.app")
 
 
 app = FastAPI(
-    title="Cognitive Neural Overlay (CNO)",
+    title="Strata Core — local-first NLP inference pipeline",
     version="0.3.0",
     description=(
-        "Front-end overlay implementation of the 5 simulated nodes from "
-        "the Sentinel Forge System Core Directive. CSTM_Lattice v1.0 aligned."
+        "A modular, backend-agnostic text-processing pipeline: input "
+        "classification, routing, context management, style conditioning, and "
+        "response synthesis, with per-stage observability. Inference backends "
+        "are pluggable (heuristics by default; a local LLM via Ollama when "
+        "enabled). Routes live under the /cno namespace."
     ),
 )
 
@@ -444,9 +451,9 @@ def get_audit_run(run_id: str):
 @app.get("/", tags=["meta"])
 def root():
     return {
-        "service":     "Cognitive Neural Overlay (CNO)",
-        "canon":       "#18",
-        "parent_spec": "Sentient Quantum Architecture v8.0",
+        "service":     "Strata Core — local-first NLP inference pipeline",
+        "namespace":   "cno",
+        "stages":      "input → router → memory → persona → output_synth",
         "endpoints":   [
             "POST /cno/process",
             "POST /cno/process/stream",
@@ -460,7 +467,6 @@ def root():
             "GET /docs",
             "GET /ui",
         ],
-        "glyph_pipeline": "📥 → 🔄 → 🧊 → 🥥 → 📤",
     }
 
 
